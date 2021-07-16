@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        form {
+            display: block;
+           
+            margin: auto;
+            border: 2px solid black;
+            text-align: center;
+            width: 580px;
+            height: 580px;
+            background-image:url("grey.jpg");
+            color:white;
+
+        }
+
+
+        img {
+
+            width: 120px;
+            height: 80px;
+            border-radius: 50%;
+           
+
+        }
+
+        button {
+            border-radius: 50%;
+            background-color: black;
+
+
+        }
+        span img{
+            margin-top:15px;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="form">
+        <h3>Click On One Of Three To Start Playing </h3><br>
+        <button id="rocks"><img src="rock.png" alt=""></button>
+        <button id="papers"><img src="paper.png" alt=""></button>
+        <button id="scissors"><img src="scissor.png" alt=""></button><br>
+
+
+        <span id="one" style="font-size: 1.2rem;"></span> <br>
+        <span id="two" style="font-size: 1.2rem;"></span><br>
+        <span id="three"></span><br><br>
+        <span id="four"></span><br><br>
+        <span id="five"></span>
+
+
+
+
+
+
+
+    </form>
+
+    <script>
+
+        var one = document.getElementById('one')
+
+        function rock(e) {
+            e.preventDefault()
+
+            one.innerHTML = "<img src='rock.png'>" + `<br>` + "<span>Rock</span>"
+            comp(one.innerHTML)
+        }
+        document.getElementById("rocks").addEventListener("click", rock)
+        function paper(e) {
+            e.preventDefault()
+            one.innerHTML = "<img src='paper.png'>" + `<br>` + "<span>Paper</span>"
+            comp(one.innerHTML)
+        }
+        document.getElementById("papers").addEventListener("click", paper)
+        function scissor(e) {
+            e.preventDefault()
+            one.innerHTML = "<img src='scissor.png'>" + `<br>` + "<span>Scissor</span>"
+            comp(one.innerHTML)
+        }
+
+        document.getElementById("scissors").addEventListener("click", scissor)
+        function comp(user) {
+            if (user !== "") {
+                var prs = ["rock.png", "paper.png", "scissor.png"];
+                var rps = ["Rock", "Paper", "Scissor"]
+                var random = parseInt(Math.random() * 3)
+                var two = document.getElementById('two')
+                two.innerHTML = `<img src='${prs[random]}'>` + `<br>` + `<span>${rps[random]}</span>`
+                console.log(two.children)
+                result(two.children[2].outerText, one.children[2].outerText)
+
+
+            }
+        }
+        var i = 0;
+        var j = 0;
+        function result(par, users) {
+            console.log(par, users)
+
+            if (par === "Rock" && users === "Rock") {
+                three.innerHTML = `YOU:${j} COMP:${i}`
+            }
+            if (par === "Rock" && users === "Paper") {
+                j++
+                three.innerHTML = `YOU:${j} COMP:${i}`
+            }
+            if (par === "Rock" && users === "Scissor") {
+                i++
+                three.innerHTML = `YOU:${j} COMP:${i}`
+            }
+            if (par === "Paper" && users === "Scissor") {
+                j++
+                three.innerHTML = `YOU:${j} COMP:${i}`
+            }
+            if (par === "Paper" && users === "Rock") {
+                i++
+                three.innerHTML = `YOU:${j} COMP:${i}`
+            }
+            if (par === "Paper" && users === "Paper") {
+                three.innerHTML = `YOU:${j} COMP:${i}`
+            }
+            if (par === "Scissor" && users === "Scissor") {
+
+                three.innerHTML = `YOU:${j} COMP:${i}`
+            }
+            if (par === "Scissor" && users === "Rock") {
+                j++
+                three.innerHTML = `YOU:${j} COMP:${i}`
+            }
+            if (par === "Scissor" && users === "Paper") {
+                i++
+                three.innerHTML = `YOU:${j} COMP:${i}`
+            }
+            if (i === 5) {
+                document.getElementById("four").innerHTML = "COMPUTER WON!!!"
+                var btnnn = document.getElementsByTagName("button")
+                btnnn[0].disabled = true
+                btnnn[1].disabled = true
+                btnnn[2].disabled = true
+                replay()
+
+            }
+            if (j === 5) {
+                document.getElementById("four").innerHTML = "YOU WON!!!"
+                var btnnn1 = document.getElementsByTagName("button")
+                btnnn1[0].disabled = true
+                btnnn1[1].disabled = true
+                btnnn1[2].disabled = true
+                replay()
+            }
+        }
+        function replay() {
+            var five = document.getElementById("five")
+            console.log(five)
+            var b = document.createElement("button")
+            console.log(b)
+            b.style.padding = "10px 15px"
+            b.style.marginRight="3px"
+            b.innerHTML = "REPLAY"
+            b.style.color="black"
+            b.style.backgroundColor=" rgb(255, 255, 117)"
+            b.style.borderRadius="20%"
+            five.appendChild(b)
+           
+            
+            console.log(five.children)
+            five.children[0].addEventListener("click", reset)
+         
+            
+        }
+
+        function reset() {
+            document.getElementById('one').reload()
+            document.getElementById('two').reload()
+            document.getElementById('three').reload()
+            var br = document.getElementsByTagName("button")
+            br[0].disabled = false
+            br[1].disabled = false
+            br[2].disabled = false
+
+        }
+       
+       
+
+
+
+    </script>
+</body>
+
+</html>
